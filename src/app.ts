@@ -1,9 +1,9 @@
 import express, { Request, Response, NextFunction, Router } from "express";
 import { json, urlencoded } from "body-parser";
 import initServer from "./socket";
-import messageController from "./controllers/messages";
+import messageRoutes from "./routes/messages";
+
 const app = express();
-const router = Router();
 
 // use body-parser
 app.use(json())
@@ -15,9 +15,8 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-router.get('/', messageController);
-router.post('/', messageController);
-app.use('/', router);
+app.use('/', messageRoutes);
+
 app.use((req: Request, res: Response, next: NextFunction) => {
   return res.status(404).json({ page: "page not found" });
 });
