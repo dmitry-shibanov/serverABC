@@ -1,9 +1,12 @@
 import { Router } from "express";
-import messageController from "../controllers/messages";
+import { messageChat, messageThemes } from "../controllers/messages";
 
 const router = Router();
 
-router.get('/', messageController);
-router.post('/', messageController);
+router.get("/chat", messageChat);
+router.post("/chat", messageChat);
+
+router.get("/themes", messageThemes);
+router.post("/themes", messageThemes);
 
 export default router;

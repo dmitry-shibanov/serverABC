@@ -6,16 +6,19 @@ import messageRoutes from "./routes/messages";
 const app = express();
 
 // use body-parser
-app.use(json())
+app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use((req: Request, res: Response, next: NextFunction) => {
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, PUSH, PATCH, DELETE, PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    next();
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, PUSH, PATCH, DELETE, PUT"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
 });
 
-app.use('/', messageRoutes);
+app.use("/", messageRoutes);
 
 app.use((req: Request, res: Response, next: NextFunction) => {
   return res.status(404).json({ page: "page not found" });
